@@ -51,6 +51,9 @@ function new_proto_msg(json_data) {
   }
   for(var k in json_data) {
     var msg = root.lookupType(k);
+    for(var j in json_data[k]) {
+      json_data[k][j] = window.btoa(json_data[k][j]);
+    }
     var payload = json_data[k];
     var err = msg.verify(payload);
     if (err) {
@@ -80,8 +83,10 @@ function create_msg() {
       }
       //Create
       var message = msg.create(payload);
+      console.log(message);
       //Encode
       var buffer = msg.encode(message).finish();
+      console.log(new TextDecoder("utf-8").decode(buffer));
       //Log and send
       console.log(buffer);
       send_request(buffer);
