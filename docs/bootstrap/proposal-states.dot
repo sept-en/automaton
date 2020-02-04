@@ -1,0 +1,25 @@
+digraph proposal_states {
+  // Setup
+  rankdir=TD;
+  size="5,5"
+  node [fontsize=12]
+  edge [lblstyle="above, sloped", fontsize=8, minlen="1.5", len="1.5"]
+
+  // States
+  node [label="Uninitialized"] U;
+  node [label="Started"] S;
+  node [label="Accepted"] A;
+  node [label="Contested"] C;
+  node [label="Finished"] F;
+  node [label="Rejected"] R;
+
+  // Transitions
+  U -> S [label="gas paid"];
+  S -> A [label="Approval % reached"];
+  S -> R [label=""];
+  A -> R [label=""];
+  A -> C [label=""];
+  C -> A [label=""];
+  C -> R [label=""];
+  A -> F [label=""]
+}
